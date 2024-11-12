@@ -4,7 +4,7 @@
 This analysis investigated the effectiveness of various machine learning models in predicting stock closing prices, using Palo Alto Networks (PANW) as a case study with 5 years of historical data.
 
 ## Research Question:
-"Can machine learning models accurately predict stock closing prices, and which model provides the most reliable predictions?"
+Can machine learning models accurately predict stock closing prices, and which model provides the most reliable predictions?
 
 ## Methodology:
 
@@ -31,7 +31,8 @@ This analysis investigated the effectiveness of various machine learning models 
 
 ### Data Overview
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/0bba97b4-0843-4a3d-8a1c-9c7478e811aa">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/29c5ccdc-2085-491e-8e50-485cb7b76dc8">
+
 
 ### Correlation Analysis
 
@@ -374,148 +375,188 @@ R² Score: 0.9717
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## LSTM Model
-Key components:
 
-Data preparation specific to LSTM:
+### Key components:
+
+#### Data preparation specific to LSTM:
 
 Sequence creation
+
 Scaling
+
 Train/test split
 
 
-LSTM Architecture:
+#### LSTM Architecture:
 
 Two LSTM layers
+
 Dropout for regularization
+
 Dense output layer
 
-
-Visualization:
+#### Visualization:
 
 Training history
+
 Predictions vs actual values
 
-
-Future predictions:
+#### Future predictions:
 
 Rolling window approach
+
 30-day forecast
 
-<img width="543" alt="image" src="https://github.com/user-attachments/assets/4e2b6bee-fa62-4f26-ae0e-99c07e6ef407">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/4e2b6bee-fa62-4f26-ae0e-99c07e6ef407">
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-XGBoost Model
+## XGBoost Model
 
-Key components:
+### Key components:
 
-Feature Engineering:
+#### Feature Engineering:
 
 Technical indicators
+
 Moving averages
+
 Price momentum
+
 Volatility measures
+
 Lagged features
 
 
-Model Configuration:
+#### Model Configuration:
 
 Gradient boosting parameters
+
 Feature importance analysis
+
 Proper train/test split
 
 
-Visualization:
+#### Visualization:
 
 Price predictions
+
 Feature importance
+
 Historical comparison
 
 
-Future Predictions:
+#### Future Predictions:
 
 5-day forecast
+
 Feature updates for sequential predictions
-<img width="547" alt="image" src="https://github.com/user-attachments/assets/6e3d2102-326e-463f-a112-85d2787a9e58">
 
-<img width="514" alt="image" src="https://github.com/user-attachments/assets/f22b73c7-97dd-479c-ae61-b4444307c7fc">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/6e3d2102-326e-463f-a112-85d2787a9e58">
 
-Model Performance Metrics:
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/f22b73c7-97dd-479c-ae61-b4444307c7fc">
+
+#### Model Performance Metrics:
+
 RMSE: $47.80
+
 MAE: $39.01
+
 R² Score: -1.6644
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Stock Price Prediction Model Review and Comparison
-Performance Analysis:
+# Stock Price Prediction Model Review and Comparison
 
-Model Rankings (by R² Score):
+## Performance Analysis:
 
-Prophet: 0.9717 (Highest)
-Linear Regression: 0.8990
-LSTM: 0.7416
-XGBoost: -1.6644 (Significant underperformance)
+#### Model Rankings (by R² Score):
 
-Key Observations:
+Prophet: 0.97 (Highest)
 
-Unexpected Results:
+Linear Regression: 0.90
+
+LSTM: 0.74
+
+XGBoost: -1.66 (Significant underperformance)
+
+## Key Observations:
+
+#### Unexpected Results:
 
 Prophet and Linear Regression outperformed more complex models
-XGBoost significantly underperformed despite its typical strength in financial data
+
+XGBoost significantly underperformed despite its typical strength in financial data (needs further investigation and calibration)
+
 LSTM performed within expected range (R² 0.60-0.70)
 
-
-Model-Specific Insights:
+#### Model-Specific Insights:
 
 Linear Regression: Shows surprisingly good performance with simple previous day's data
+
 Prophet: Excels at capturing seasonal patterns and trends
+
 LSTM: Demonstrates reliable performance consistent with expectations
+
 XGBoost: Requires significant optimization and feature engineering
 
+## Improvement Suggestions:
 
-
-Improvement Suggestions:
-
-XGBoost Model:
+#### XGBoost Model:
 
 Implement feature selection
+
 Tune hyperparameters
+
 Add more relevant technical indicators
+
 Consider different time windows for features
 
 
-LSTM Model:
+#### LSTM Model:
 
 Experiment with network architecture
+
 Add attention mechanisms
+
 Include more sequence length variations
+
 Implement batch normalization
 
 
-General Improvements:
+#### General Improvements:
 
 Add market sentiment analysis
+
 Include sector-specific indicators
+
 Implement ensemble methods
+
 Add outlier detection and handling
 
 
 
-Recommendations:
+## Recommendations:
 
 Short-term: Use Linear Regression or Prophet for quick, reliable predictions
+
 Long-term: Develop ensemble approach combining multiple models
+
 Research: Investigate XGBoost's underperformance
+
 Production: Consider Prophet for deployment due to balance of performance and simplicity
 
-Future Work:
+## Future Work:
 
 Develop hybrid models
+
 Include external data sources
+
 Implement real-time prediction capabilities
+
 Add confidence intervals for all models
+
 Create automated model selection based on market conditions
 
 
