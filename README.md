@@ -9,16 +9,20 @@ This analysis investigated the effectiveness of various machine learning models 
 ## Methodology:
 
 #### Exploratory and Historical Analysis
-#### Model Selection 
 
-Linear Regression
 
-LSTM (Deep Learning)
+*   Statistic Summary
+*   Historical Analysis
 
-Prophet (Time Series)
 
-XGBoost (Gradient Boosting)
+#### Model Selection
 
+
+
+*   Linear Regression
+*   LSTM (Deep Learning)
+*   Prophet (Time Series)
+*   XGBoost (Gradient Boosting)
 
 
 
@@ -141,28 +145,42 @@ The volume patterns provide crucial context for our prediction models, as high-v
 <img width="900" alt="image" src="https://github.com/user-attachments/assets/9dce2719-482d-4b1f-bcf1-a46626ae385e">
 
 The two images together provide a comprehensive view of PANW's price and volume trends:
-Price Analysis (Image 1):
+
+#### Price Analysis (Image 1):
 
 Strong upward trend from $50 (2020) to $350+ (2025)
+
 Moving averages (20-day and 50-day) show clear trend confirmation
+
 Notable consolidation period during 2022-2023 around $150-$200
+
 Accelerated growth phase from 2023 onwards
+
 Increased volatility in recent periods (2024)
 
-Volume Analysis (Image 2):
+#### Volume Analysis (Image 2):
 
 Base trading volume represented by 20-day MA (black line)
+
 Several major volume spikes throughout the period
+
 Highest spike in late 2023 (>50M shares)
+
 Recent volume pattern shows increased activity
+
 Volume spikes often coincide with price movement changes
 
-Key Relationships:
+#### Key Relationships:
 
 Higher volume often accompanies significant price movements
+
 Moving averages help identify trend changes
+
 Recent period (2023-2024) shows both higher prices and more frequent volume spikes
+
 Market interest (indicated by volume) has increased with price appreciation
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Model Selection
 
@@ -187,9 +205,9 @@ Target: Close price
 
 80-20 train-test split
 
-<img width="766" alt="image" src="https://github.com/user-attachments/assets/e1892806-2f7a-4b9d-9f39-ee475240632e">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/e1892806-2f7a-4b9d-9f39-ee475240632e">
 
-<img width="512" alt="image" src="https://github.com/user-attachments/assets/2c269f8b-2f39-4170-b269-a056db893881">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/2c269f8b-2f39-4170-b269-a056db893881">
 
 ### Performance Metrics:
 
@@ -198,13 +216,16 @@ R² Score: 0.99
 RMSE: 1.7
 
 Very high R² suggests potential overfitting
+
 Low RMSE indicates small prediction errors
+
 Results suggest need for model refinement
 
 I can see the issue causing the overfitting in my Linear Regression model. The main problem is data leakage due to using same-day price data.
 The issue is that 'High' and 'Low' prices are from the same day as the 'Close' price we're trying to predict. This means we're using information that wouldn't be available at prediction time, leading to artificially high R² scores.
 
 ## Linear Regression with Previous Day's Data
+
 ### Key improvements:
 
 Only uses previous day's data
@@ -245,97 +266,110 @@ R² Score: 0.8990
 RMSE: $9.42
 MAE: $5.48
 
-<img width="763" alt="image" src="https://github.com/user-attachments/assets/e2554a5d-c12b-41ba-9f20-5d048230cabf">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/e2554a5d-c12b-41ba-9f20-5d048230cabf">
 
-<img width="508" alt="image" src="https://github.com/user-attachments/assets/401c2bee-a8d7-4054-b88c-7a47eab1caa2">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/401c2bee-a8d7-4054-b88c-7a47eab1caa2">
 
-<img width="760" alt="image" src="https://github.com/user-attachments/assets/5b200edb-4ce5-41fd-83f7-eed9c954d1da">
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/5b200edb-4ce5-41fd-83f7-eed9c954d1da">
 
-Error Statistics:
+#### Error Statistics:
+
 Mean Error: $0.52
+
 Error Std Dev: $9.42
+
 Max Overprediction: $-104.98
+
 Max Underprediction: $23.95
 
 This error plot provides several important insights about the Linear Regression model's performance:
 
-Error Distribution:
-
+#### Error Distribution:
 
 Most errors fluctuate between +20 and -20 dollars
+
 Generally symmetric around zero (blue dashed line)
+
 Shows relatively consistent volatility except for one major outlier
 
 
-Notable Issues:
-
+#### Notable Issues:
 
 Large outlier spike around March 2024 (approximately -100 dollar error)
+
 This could indicate:
 
 A significant market event
+
 Earnings announcement
+
 Other unexpected news affecting the stock price
 
-
-
-
-Pattern Analysis:
-
+#### Pattern Analysis:
 
 Error magnitude appears relatively stable over time
+
 No clear trend in errors (good)
+
 Random distribution around zero suggests unbiased predictions
+
 Consistent error band width suggests stable model performance
 
-
-Areas for Improvement:
-
+#### Areas for Improvement:
 
 Model struggles with sudden large price movements
-Could benefit from:
+
+#### Could benefit from:
 
 Outlier handling
+
 Additional features to capture market events
+
 Rolling window training to adapt to changing conditions
 
 ## Prophet Model
 
-Key components:
+### Key components:
 
 Data preparation specific to Prophet requirements
+
 Model configuration with seasonality parameters
+
 Forecast visualization with confidence intervals
+
 Component analysis
+
 Performance metrics calculation
 
-The Prophet model features:
+### The Prophet model features:
 
 Daily, weekly, and yearly seasonality
+
 Automatic changepoint detection
+
 Confidence intervals
+
 Trend decomposition
 
-<img width="515" alt="image" src="https://github.com/user-attachments/assets/daed6fd6-1555-43a7-86bb-36522ec95c8e">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/daed6fd6-1555-43a7-86bb-36522ec95c8e">
 
-<img width="454" alt="image" src="https://github.com/user-attachments/assets/085c8666-3904-4caa-b4da-24df56c60cd1">
 
-<img width="443" alt="image" src="https://github.com/user-attachments/assets/9def9614-900e-4198-9c3c-6249aa2c03a2">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/085c8666-3904-4caa-b4da-24df56c60cd1">
 
-<img width="451" alt="image" src="https://github.com/user-attachments/assets/ef83bbc9-53bf-4ca7-84db-34d1a5c3ed1d">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/9def9614-900e-4198-9c3c-6249aa2c03a2">
 
-Model Performance Metrics:
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/ef83bbc9-53bf-4ca7-84db-34d1a5c3ed1d">
+
+### Model Performance Metrics:
+
 RMSE: $14.08
+
 MAE: $10.67
+
 R² Score: 0.9717
 
-Next 5 Days Forecast:
-           Date  Predicted Price  Lower Bound  Upper Bound
-1190 2024-11-05       354.867437   337.175962   373.194015
-1191 2024-11-06       354.691919   336.597743   371.799442
-1192 2024-11-07       355.147516   334.587008   372.889406
-1193 2024-11-08       355.956970   336.955457   372.926920
-1194 2024-11-09       359.476836   342.163642   378.385061
+#### Next 5 Days Forecast:
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5d4637cd-60dd-4b96-a739-5d6d2cc34269">
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
